@@ -36,8 +36,8 @@ var collection *mongo.Collection
 
 func init() {
 	//client option
-
-	clientOption := options.Client().ApplyURI(goDotEnvVariable("dbConnString"))
+	dbstr := "mongodb+srv://adminritz:9NUFiq51bQzUDzWy@cluster0.louh2fc.mongodb.net/?retryWrites=true&w=majority"
+	clientOption := options.Client().ApplyURI(dbstr)
 
 	// connect to mongo db
 	client, err := mongo.Connect(context.TODO(), clientOption)
