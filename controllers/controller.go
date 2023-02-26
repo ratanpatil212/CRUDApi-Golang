@@ -9,22 +9,12 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"github.com/ratanpatil212/mongodb/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
-
-func goDotEnvVariable(key string) string {
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatal("Error loading .env file.")
-	}
-	return os.Getenv(key)
-}
 
 const dbName = "netflix"
 const colName = "watchlist"
@@ -37,7 +27,7 @@ var collection *mongo.Collection
 func init() {
 	//client option
 
-	clientOption := options.Client().ApplyURI(goDotEnvVariable("dbConnString"))
+	clientOption := options.Client().ApplyURI(os.Getenv("dbConnString"))
 
 	// connect to mongo db
 	client, err := mongo.Connect(context.TODO(), clientOption)
